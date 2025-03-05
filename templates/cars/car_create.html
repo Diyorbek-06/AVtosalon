@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Create</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="brand" placeholder="brand">
+    <input type="text" name="model" placeholder="model">
+    <input type="number" name="price" placeholder="price">
+    <input type="text" name="color" placeholder="color">
+    <input type="number" name="year" placeholder="year">
+    <input type="text" name="fuel_type" placeholder="fuel_type">
+    <input type="number" name="mileage" placeholder="mileage">
+    <input type="text" name="desciptions" placeholder="desciptions">
+    <input type="file" name="image">
+    <button type="submit"> Create Car</button>
+</form>
+</body>
+</html>

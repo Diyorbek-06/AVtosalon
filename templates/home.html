@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtosalon - Bosh Sahifa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #808080;
+        }
+        header {
+            background-color: #6A5ACD;
+            color: black;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .car-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .car {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .car img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .car h3 {
+            margin: 10px 0;
+        }
+        .contact {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    🚗 Avtosalon - Eng yaxshi avtomobillar!
+</header>
+
+<div class="container">
+    <a href="{% url 'cars-list' %}"> Mavjud Mashinalar</a>
+    <div class="cars-list">
+        {% for car in cars %}
+        <div class="car">
+            {% if car.image %}
+            <a href="{% url 'car-detail' pk=car.pk %}">
+                <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+            </a>
+            {% else %}
+            <a href="{% url 'car-detail' pk=car.pk %}">
+                <img src="{% static 'default_car.png' %}" alt="Default Car Image">
+            </a>
+            {% endif %}
+            <h3>Marka: {{ car.brand }} | Model: {{ car.model }}</h3>
+            <p>Narx: ${{ car.price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="contact">
+    <h2>Biz bilan bog‘laning</h2>
+    <p>Telefon: +998 90 123 45 67</p>
+    <p>Manzil: Buxoro, Alpomish ko‘chasi, 15</p>
+</div>
+
+</body>
+</html>

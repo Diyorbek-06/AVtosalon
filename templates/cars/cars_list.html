@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtosalon - Mashinalar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #B2DFDB;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Uzbek_traditional_pattern.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        header {
+            background: linear-gradient(135deg, #222, #444);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .car-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .car {
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .car:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .car img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .car img:hover {
+            opacity: 0.8;
+        }
+        .car h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .car p {
+            font-size: 16px;
+            color: #555;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ADD CAR BUTTON STYLE */
+        .add-car-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .add-car-btn:hover {
+            background: #e68900;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="{% url 'home' %}"> 🚗 Avtosalon - Bizning Mashinalar</a>
+</header>
+
+<div class="container">
+    <div class="car-list">
+        {% for car in cars %}
+        <div class="car">
+            <a href="{% url 'car-detail' car.id %}">
+                {% if car.image %}
+                    <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
+                {% else %}
+                    <img src="media/default_car.png" alt="Default Image">
+                {% endif %}
+            </a>
+            <h3>Marka: {{ car.make }} | Model: {{ car.model }}</h3>
+            <p>Narx: ${{ car.price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ADD CAR BUTTON -->
+<a href="{% url 'car-create' %}">
+    <button class="add-car-btn">➕ Add Car</button>
+</a>
+
+</body>
+</html>
