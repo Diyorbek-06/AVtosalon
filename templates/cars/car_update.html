@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 Mashina Ma'lumotlarini Yangilash</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-$END$
+<body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+
+    <div class="container">
+        <div class="card shadow-lg p-4 bg-white rounded">
+            <h2 class="text-center text-primary mb-4">🚗 Mashina Ma'lumotlarini Yangilash</h2>
+
+            <form method="POST" enctype="multipart/form-data" class="row g-3">
+                {% csrf_token %}
+
+                <div class="col-md-6">
+                    <label for="brand" class="form-label">🚘 Brend:</label>
+                    <input type="text" id="brand" name="brand" value="{{ car.brand }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="model" class="form-label">📌 Model:</label>
+                    <input type="text" id="model" name="model" value="{{ car.model }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="price" class="form-label">💰 Narx ($):</label>
+                    <input type="number" id="price" name="price" value="{{ car.price }}" step="0.01" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="year" class="form-label">📅 Ishlab chiqarilgan yili:</label>
+                    <input type="number" id="year" name="year" value="{{ car.year }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="color" class="form-label">🎨 Rangi:</label>
+                    <input type="text" id="color" name="color" value="{{ car.color }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="mileage" class="form-label">📊 Yurgan masofasi (km):</label>
+                    <input type="number" id="mileage" name="mileage" value="{{ car.miliage }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="fuel_type" class="form-label">⛽ Yoqilg'i turi:</label>
+                    <input type="text" id="fuel_type" name="fuel_type" value="{{ car.fuel_type }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="desciptions" class="form-label">📄 Tavsif:</label>
+                    <textarea id="desciptions" name="desciptions" class="form-control" rows="3" required>{{ car.desciptions }}</textarea>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="image" class="form-label">📷 Mashina rasmi:</label>
+                    <input type="file" id="image" name="image" class="form-control">
+                </div>
+
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-success">✅ Yangilash</button>
+                    <a href="{% url 'car-detail' car.id %}" class="btn btn-secondary">⬅️ Ortga qaytish</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

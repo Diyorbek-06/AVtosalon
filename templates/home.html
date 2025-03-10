@@ -4,90 +4,54 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avtosalon - Bosh Sahifa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #808080;
-        }
-        header {
-            background-color: #6A5ACD;
-            color: black;
-            text-align: center;
-            padding: 15px;
-            font-size: 24px;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-        .car-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .car {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        .car img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .car h3 {
-            margin: 10px 0;
-        }
-        .contact {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: #333;
-            color: white;
-        }
-    </style>
+    <title>🚗 Avtosalon - Bosh Sahifa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-<header>
-    🚗 Avtosalon - Eng yaxshi avtomobillar!
+<!-- Header -->
+<header class="bg-primary text-white text-center py-4 shadow-lg">
+    <h1 class="fw-bold">🚗 Avtosalon - Eng yaxshi avtomobillar!</h1>
 </header>
 
-<div class="container">
-    <a href="{% url 'cars-list' %}"> Mavjud Mashinalar</a>
-    <div class="cars-list">
+<!-- Mashinalar ro‘yxati -->
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <a href="{% url 'cars-list' %}" class="btn btn-outline-primary btn-lg">📋 Mavjud Mashinalar</a>
+    </div>
+
+    <div class="row g-4">
         {% for car in cars %}
-        <div class="car">
-            {% if car.image %}
-            <a href="{% url 'car-detail' pk=car.pk %}">
-                <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
-            </a>
-            {% else %}
-            <a href="{% url 'car-detail' pk=car.pk %}">
-                <img src="{% static 'default_car.png' %}" alt="Default Car Image">
-            </a>
-            {% endif %}
-            <h3>Marka: {{ car.brand }} | Model: {{ car.model }}</h3>
-            <p>Narx: ${{ car.price }}</p>
+        <div class="col-md-4">
+            <div class="card shadow-lg h-100">
+                <a href="{% url 'car-detail' pk=car.pk %}">
+                    {% if car.image %}
+                        <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+                    {% else %}
+                        <img src="{% static 'default_car.png' %}" class="card-img-top" alt="Default Car Image">
+                    {% endif %}
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                    <p class="card-text text-danger fw-bold">💰 Narx: ${{ car.price }}</p>
+                    <a href="{% url 'car-detail' pk=car.pk %}" class="btn btn-primary">Batafsil ➡️</a>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
 </div>
 
-<div class="contact">
-    <h2>Biz bilan bog‘laning</h2>
-    <p>Telefon: +998 90 123 45 67</p>
-    <p>Manzil: Buxoro, Alpomish ko‘chasi, 15</p>
-</div>
+<!-- Contact Info -->
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <h3>📞 Biz bilan bog‘laning</h3>
+    <p class="mb-1">📲 Telefon: <a href="tel:+998901234567" class="text-warning text-decoration-none">+998 90 123 45 67</a></p>
+    <p>📍 Manzil: Buxoro, Alpomish ko‘chasi, 15</p>
+</footer>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
